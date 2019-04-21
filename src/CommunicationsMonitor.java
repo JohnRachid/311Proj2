@@ -6,7 +6,7 @@ public class CommunicationsMonitor {
     private HashMap<Integer, List<ComputerNode>> G;
     public ArrayList<ComputerNode> computerNodeList;
     public CommunicationsMonitor(){
-        G = new HashMap<Integer, List<ComputerNode>>;
+        G = new HashMap<Integer, List<ComputerNode>>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
     }
 
@@ -23,7 +23,7 @@ public class CommunicationsMonitor {
     }
 
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y){
-
+        return null;
     }
 
     public HashMap<Integer, List<ComputerNode>> getComputerMapping(){
@@ -31,6 +31,6 @@ public class CommunicationsMonitor {
     }
 
     public List<ComputerNode> getComputerMapping(int c){
-
+        return null;
     }
 }
