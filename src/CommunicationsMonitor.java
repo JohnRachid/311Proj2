@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -6,10 +8,12 @@ import java.util.ArrayList;
 public class CommunicationsMonitor {
     private HashMap<Integer, List<ComputerNode>> G;
     public ArrayList<ComputerNode> computerNodeList;
+    public ArrayList<Pair<ComputerNode, ComputerNode>> E;
 
 
     public CommunicationsMonitor(){
         G = new HashMap<Integer, List<ComputerNode>>();
+        E = new ArrayList<Pair<ComputerNode, ComputerNode>>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
     }
 
@@ -59,8 +63,12 @@ public class CommunicationsMonitor {
     public void addCommunication(int c1, int c2, int timestamp){
         ComputerNode a = new ComputerNode(c1,timestamp);
         ComputerNode b = new ComputerNode(c2,timestamp);
+        E.add(new Pair<ComputerNode, ComputerNode>(a, b));
         computerNodeList.add(a);
         computerNodeList.add(b);
+
+        a.addNeighbor(b);
+        b.addNeighbor(a);
 
     }
 
@@ -75,4 +83,28 @@ public class CommunicationsMonitor {
     public List<ComputerNode> getComputerMapping(int c){
         return null;
     }
+
+//    public void bfs(int start) {
+//        int[] visited = new int[adjList.length];
+//        LinkedList<Integer> queue = new LinkedList<Integer>();
+//
+//        if (start >= adjList.length || start < 0) {
+//            System.err.println("Start value doesn't exist");
+//            return;
+//        }
+//        visited[start] = 1;
+//        queue.add(start);
+//
+//        while (queue.size() != 0) {
+//            start = queue.poll();
+//            System.out.print(start);
+//            for (int i = 0; i < adjList[start].size(); i++) {
+//                int next = adjList[start].get(i);
+//                if (visited[next] == 0) {
+//                    visited[next] = 1;
+//                    queue.add(next);
+//                }
+//            }
+//        }
+//    }
 }
