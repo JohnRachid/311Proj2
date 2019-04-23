@@ -7,18 +7,18 @@ public class CommunicationsMonitor {
     private HashMap<Integer, List<ComputerNode>> G;
     public ArrayList<ComputerNode> computerNodeList;
 
+
     public CommunicationsMonitor(){
         G = new HashMap<Integer, List<ComputerNode>>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
     }
 
     public void createGraph(){
+        ArrayList<ComputerNode> sorted = (ArrayList<ComputerNode>)computerNodeList.clone();
+        sorted = quickSort(sorted, 0, sorted.size()-1);
 
-        for (int i = 0; i < computerNodeList.size(); i++){
-            if (G.containsKey(computerNodeList.get(i))) {
-                List<ComputerNode> edges = G.get(i);
-            }
-        }
+       // for (int i = 0; i < )
+
     }
 
     public static ArrayList<ComputerNode> quickSort(ArrayList<ComputerNode> computerNodeList, int first, int last) {
@@ -31,7 +31,7 @@ public class CommunicationsMonitor {
         return computerNodeList;
     }
 
-    public static int partition(ArrayList<ComputerNode> computerNodeList, int first, int last) {
+    private static int partition(ArrayList<ComputerNode> computerNodeList, int first, int last) {
         ComputerNode pivot = computerNodeList.get(last);
         int j = first;
         int i = first - 1;
