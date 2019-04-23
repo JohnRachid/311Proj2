@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -6,9 +8,11 @@ import java.util.ArrayList;
 public class CommunicationsMonitor {
     private HashMap<Integer, List<ComputerNode>> G;
     public ArrayList<ComputerNode> computerNodeList;
+    public ArrayList<Pair<ComputerNode, ComputerNode>> E;
 
     public CommunicationsMonitor(){
         G = new HashMap<Integer, List<ComputerNode>>();
+        E = new ArrayList<Pair<ComputerNode, ComputerNode>>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
     }
 
@@ -59,7 +63,7 @@ public class CommunicationsMonitor {
     public void addCommunication(int c1, int c2, int timestamp){
         ComputerNode a = new ComputerNode(c1,timestamp);
         ComputerNode b = new ComputerNode(c2,timestamp);
-
+        E.add(new Pair<ComputerNode, ComputerNode>(a, b));
         computerNodeList.add(a);
         computerNodeList.add(b);
 
