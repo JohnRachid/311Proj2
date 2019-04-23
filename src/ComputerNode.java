@@ -12,6 +12,10 @@ public class ComputerNode {
         ArrayList<ComputerNode> neighbors = new ArrayList<ComputerNode>();
     }
 
+    public String toString(){
+        return id + " " + timestamp;
+    }
+
     int getID(){
         return id;
     }
