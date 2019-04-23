@@ -24,7 +24,7 @@ public class ComputerNode {
         return timestamp;
     }
     List<ComputerNode> getOutNeighbors(int c){
-        return null; //TODO finish getOutNeighbors
+        return neighbors;
     }
 
     public void addNeighbor(ComputerNode node){
