@@ -53,8 +53,12 @@ public class CommunicationsMonitor {
     public void addCommunication(int c1, int c2, int timestamp){
         ComputerNode a = new ComputerNode(c1,timestamp);
         ComputerNode b = new ComputerNode(c2,timestamp);
+
         computerNodeList.add(a);
         computerNodeList.add(b);
+
+        a.addNeighbor(b);
+        b.addNeighbor(a);
 
     }
 
@@ -69,4 +73,28 @@ public class CommunicationsMonitor {
     public List<ComputerNode> getComputerMapping(int c){
         return null;
     }
+
+//    public void bfs(int start) {
+//        int[] visited = new int[adjList.length];
+//        LinkedList<Integer> queue = new LinkedList<Integer>();
+//
+//        if (start >= adjList.length || start < 0) {
+//            System.err.println("Start value doesn't exist");
+//            return;
+//        }
+//        visited[start] = 1;
+//        queue.add(start);
+//
+//        while (queue.size() != 0) {
+//            start = queue.poll();
+//            System.out.print(start);
+//            for (int i = 0; i < adjList[start].size(); i++) {
+//                int next = adjList[start].get(i);
+//                if (visited[next] == 0) {
+//                    visited[next] = 1;
+//                    queue.add(next);
+//                }
+//            }
+//        }
+//    }
 }
