@@ -12,57 +12,64 @@ public class InfectionQueueTests {
 
     @Test
     public void infectionQueue_Example_1_Good() {
-        HashMap<Integer, List<ComputerNode>> G = new HashMap<Integer, List<ComputerNode>>();
+//        HashMap<Integer, List<ComputerNode>> G = new HashMap<Integer, List<ComputerNode>>();
+//
+//        List<ComputerNode> c1Nodes = new ArrayList<ComputerNode>();
+//        ComputerNode c1_4 = new ComputerNode(1, 4);
+//        ComputerNode c1_12 = new ComputerNode(1, 12);
+//        c1Nodes.add(c1_4);
+//        c1Nodes.add(c1_12);
+//
+//
+//        List<ComputerNode> c2Nodes = new ArrayList<ComputerNode>();
+//        ComputerNode c2_4 = new ComputerNode(2, 4);
+//        ComputerNode c2_8 = new ComputerNode(2, 8);
+//        c1Nodes.add(c2_4);
+//        c1Nodes.add(c2_8);
+//
+//        List<ComputerNode> c3Nodes = new ArrayList<ComputerNode>();
+//        ComputerNode c3_8 = new ComputerNode(3, 8);
+//        c1Nodes.add(c3_8);
+//
+//        List<ComputerNode> c4Nodes = new ArrayList<ComputerNode>();
+//        ComputerNode c4_8 = new ComputerNode(4, 8);
+//        ComputerNode c4_8_2 = new ComputerNode(4, 8);
+//        ComputerNode c4_12 = new ComputerNode(4, 12);
+//        c1Nodes.add(c4_8);
+//        c1Nodes.add(c4_8_2);
+//        c1Nodes.add(c4_12);
+//
+//        c1_4.addNeighbor(c2_4);
+//        c2_4.addNeighbor(c1_4);
+//        c2_4.addNeighbor(c2_8);
+//
+//        c2_8.addNeighbor(c4_8);
+//        c4_8.addNeighbor(c2_8);
+//        c4_8.addNeighbor(c4_8_2);
+//        c4_8_2.addNeighbor(c4_12);
+//
+//        c3_8.addNeighbor(c4_8);
+//        c4_8.addNeighbor(c3_8);
+//
+//        c1_12.addNeighbor(c4_12);
+//        c4_12.addNeighbor(c1_12);
+//        c1_4.addNeighbor(c1_12);
+//
+//
+//        G.put(1, c1Nodes);
+//        G.put(2, c2Nodes);
+//        G.put(3, c3Nodes);
+//        G.put(4, c4Nodes);
 
-        List<ComputerNode> c1Nodes = new ArrayList<ComputerNode>();
-        ComputerNode c1_4 = new ComputerNode(1, 4);
-        ComputerNode c1_12 = new ComputerNode(1, 12);
-        c1Nodes.add(c1_4);
-        c1Nodes.add(c1_12);
+        CommunicationsMonitor monitor = new CommunicationsMonitor();
+        monitor.addCommunication(1, 2, 4);
+        monitor.addCommunication(2, 4, 8);
+        monitor.addCommunication(3, 4, 8);
+        monitor.addCommunication(1, 4, 12);
+        monitor.createGraph();
 
-
-        List<ComputerNode> c2Nodes = new ArrayList<ComputerNode>();
-        ComputerNode c2_4 = new ComputerNode(2, 4);
-        ComputerNode c2_8 = new ComputerNode(2, 8);
-        c1Nodes.add(c2_4);
-        c1Nodes.add(c2_8);
-
-        List<ComputerNode> c3Nodes = new ArrayList<ComputerNode>();
-        ComputerNode c3_8 = new ComputerNode(3, 8);
-        c1Nodes.add(c3_8);
-
-        List<ComputerNode> c4Nodes = new ArrayList<ComputerNode>();
-        ComputerNode c4_8 = new ComputerNode(4, 8);
-        ComputerNode c4_8_2 = new ComputerNode(4, 8);
-        ComputerNode c4_12 = new ComputerNode(4, 12);
-        c1Nodes.add(c4_8);
-        c1Nodes.add(c4_8_2);
-        c1Nodes.add(c4_12);
-
-        c1_4.addNeighbor(c2_4);
-        c2_4.addNeighbor(c1_4);
-        c2_4.addNeighbor(c2_8);
-
-        c2_8.addNeighbor(c4_8);
-        c4_8.addNeighbor(c2_8);
-        c4_8.addNeighbor(c4_8_2);
-        c4_8_2.addNeighbor(c4_12);
-
-        c3_8.addNeighbor(c4_8);
-        c4_8.addNeighbor(c3_8);
-
-        c1_12.addNeighbor(c4_12);
-        c4_12.addNeighbor(c1_12);
-        c1_4.addNeighbor(c1_12);
-
-
-        G.put(1, c1Nodes);
-        G.put(2, c2Nodes);
-        G.put(3, c3Nodes);
-        G.put(4, c4Nodes);
-
-        List<ComputerNode> results = queryInfection(G, 1, 3, 2, 8);
-
+        List<ComputerNode> results = monitor.queryInfection(1, 3, 2, 8);
+        System.out.println(results);
     }
 
 
