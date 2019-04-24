@@ -90,7 +90,6 @@ public class CommunicationsMonitor {
             ComputerNode startNode = G.get(c1).get(0);
             List<ComputerNode> Q = new LinkedList<>();
             List<ComputerNode> path = new LinkedList<>();
-            Q.add(startNode);
             ComputerNode current;
             Q.add(startNode);
             while (!Q.isEmpty()) {
