@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -63,17 +64,32 @@ public class CreateGraphTests {
 
     @Test
     public void runtimeTest1(){
-        int maxC = 10000;
-        int maxT = 2500;
+        int maxC = 100000;
+        int maxT = 1000;
         CommunicationsMonitor cm = new CommunicationsMonitor();
         ArrayList<ComputerNode[]> nodes = cm.getE();
+        ComputerNode startNode = null;
+        ComputerNode endNode = null;
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 100000; i++){
-            nodes.add(TripleGenerator.generateTripleRand(maxC, maxT));
+        int max = 100000;
+        for (int i = 0; i < max; i++){
+            ComputerNode[] n = TripleGenerator.generateTripleRand(maxC, maxT);
+            nodes.add(n);
+            if (i == 0){
+                startNode = n[0];
+            }else if (i == max-1){
+                endNode = n[1];
+            }
         }
         cm.createGraph();
         long duration = System.currentTimeMillis() - start;
-        System.out.println(duration);
         assertEquals(true, duration <= 3000);
+        System.out.println(duration);
+        start = System.currentTimeMillis();
+        LinkedList<ComputerNode> infection = (LinkedList<ComputerNode>)cm.queryInfection(startNode.getID(), endNode.getID(), startNode.getTimestamp(), endNode.getTimestamp());
+        duration = System.currentTimeMillis() - start;
+        assertEquals(true, duration <= 3000);
+        System.out.println(duration);
+        System.out.println(infection.get(0));
     }
 }
