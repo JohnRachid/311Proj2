@@ -97,7 +97,6 @@ public class CommunicationsMonitor {
             ComputerNode startNode = G.get(c1).get(0);
             List<ComputerNode> Q = new LinkedList<>();
             List<ComputerNode> path = new LinkedList<>();
-            Q.add(startNode);
             ComputerNode current;
             Q.add(startNode);
             while (!Q.isEmpty()) {
@@ -127,7 +126,7 @@ public class CommunicationsMonitor {
     }
 
     public List<ComputerNode> getComputerMapping(int c){
-        return null;
+        return G.get(c);
     }
 
     public void printMap(){
@@ -141,27 +140,7 @@ public class CommunicationsMonitor {
         }
     }
 
-//    public void bfs(int start) {
-//        int[] visited = new int[adjList.length];
-//        LinkedList<Integer> queue = new LinkedList<Integer>();
-//
-//        if (start >= adjList.length || start < 0) {
-//            System.err.println("Start value doesn't exist");
-//            return;
-//        }
-//        visited[start] = 1;
-//        queue.add(start);
-//
-//        while (queue.size() != 0) {
-//            start = queue.poll();
-//            System.out.print(start);
-//            for (int i = 0; i < adjList[start].size(); i++) {
-//                int next = adjList[start].get(i);
-//                if (visited[next] == 0) {
-//                    visited[next] = 1;
-//                    queue.add(next);
-//                }
-//            }
-//        }
-//    }
+    public ArrayList<ComputerNode[]> getE() {
+        return E;
+    }
 }
