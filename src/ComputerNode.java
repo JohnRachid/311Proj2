@@ -11,7 +11,7 @@ public class ComputerNode {
     ComputerNode(int newID, int newTimestamp){
         id = newID;
         timestamp = newTimestamp;
-        ArrayList<ComputerNode> neighbors = new ArrayList<ComputerNode>();
+        neighbors = new ArrayList<ComputerNode>();
         visited = false;
     }
 
@@ -26,7 +26,8 @@ public class ComputerNode {
     int getTimestamp(){
         return timestamp;
     }
-    List<ComputerNode> getOutNeighbors(int c){
+
+    List<ComputerNode> getOutNeighbors(){
         return neighbors;
     }
 
