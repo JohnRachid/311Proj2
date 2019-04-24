@@ -43,11 +43,11 @@ public class CommunicationsMonitor {
                 int size2 = list2.size();
                 list1.add(cn1);
                 list2.add(cn2);
-                if (size1 > 1) {
-                    G.get(cn1.getID()).get(size1-2).addNeighbor(cn1);
+                if (size1 >= 1) {
+                    G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
                 }
-                if (size2 > 1) {
-                    G.get(cn2.getID()).get(size2-2).addNeighbor(cn2);
+                if (size2 >= 1) {
+                    G.get(cn2.getID()).get(size2-1).addNeighbor(cn2);
                 }
             }
         }else{
