@@ -47,7 +47,7 @@ public class CommunicationsMonitor {
                     cn1.addNeighbor(sorted.get(i - 1)[0]);
                 }
                 if (size2 > 1) {
-                    cn1.addNeighbor(sorted.get(i - 1)[1]);
+                    cn2.addNeighbor(sorted.get(i - 1)[1]);
                 }
             }
         }else{
