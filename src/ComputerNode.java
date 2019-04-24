@@ -53,4 +53,11 @@ public class ComputerNode {
         }
     }
 
+    public void setId(int id2){
+        id = id2;
+    }
+    public int setTimestamp(int timestamp2){
+        return timestamp = timestamp2;
+    }
+
 }
