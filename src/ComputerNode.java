@@ -42,4 +42,15 @@ public class ComputerNode {
     }
 
 
+    public boolean equals(ComputerNode c2) {
+        if (c2 == null) {
+            return false;
+        }
+        if (timestamp == c2.getTimestamp() && id == c2.getID()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
