@@ -27,6 +27,20 @@ public class CommunicationsMonitor {
             if (!G.containsKey(sorted.get(i)[1])){
                 G.put(sorted.get(i)[1].getID(), new LinkedList<ComputerNode>());
             }
+            ComputerNode cn1 = E.get(i)[0];
+            ComputerNode cn2 = E.get(i)[1];
+            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>)G.get(i);
+            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>)G.get(i);
+            int size1 = list1.size();
+            int size2 = list2.size();
+            list1.add(cn1);
+            list2.add(cn2);
+            if (size1 > 1){
+                cn1.addNeighbor(sorted.get(i-1)[0]);
+            }
+            if (size2 > 1){
+                cn1.addNeighbor(sorted.get(i-1)[0]);
+            }
         }
 
     }
