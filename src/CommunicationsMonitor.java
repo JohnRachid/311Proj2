@@ -50,11 +50,12 @@ public class CommunicationsMonitor {
                     list2.add(cn2);
                 }
 
-
-                if (size1 >= 1) {
+                if (size1 >= 1 && !(cn1.getID() == G.get(cn1.getID()).get(size1-1).getID() &&
+                                    cn1.getTimestamp() == G.get(cn1.getID()).get(size1-1).getTimestamp())) {
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
                 }
-                if (size2 >= 1) {
+                if (size2 >= 1 && !(cn2.getID() == G.get(cn2.getID()).get(size2-1).getID() &&
+                                    cn2.getTimestamp() == G.get(cn2.getID()).get(size2-1).getTimestamp())) {
                     G.get(cn2.getID()).get(size2-1).addNeighbor(cn2);
                 }
             }
