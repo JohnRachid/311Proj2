@@ -8,42 +8,51 @@ import java.util.ArrayList;
 public class CommunicationsMonitor {
     private HashMap<Integer, List<ComputerNode>> G;
     public ArrayList<ComputerNode[]> E;
+    private boolean calledCreateGraph;
 
 
     public CommunicationsMonitor(){
         G = new HashMap<Integer, List<ComputerNode>>();
         E = new ArrayList<ComputerNode[]>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
+        calledCreateGraph = false;
     }
 
     public void createGraph(){
-        ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>)E.clone();
-        sorted = quickSort(sorted, 0, sorted.size()-1);
+        if (!calledCreateGraph) {
+            calledCreateGraph = true;
+            ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>) E.clone();
+            sorted = quickSort(sorted, 0, sorted.size() - 1);
 
-        for (int i = 0; i < sorted.size(); i++){
-            ComputerNode[] curNode = sorted.get(i);
-            if (!G.containsKey(curNode[0].getID())){
-                G.put(curNode[0].getID(), new LinkedList<ComputerNode>());
+            for (int i = 0; i < sorted.size(); i++) {
+                ComputerNode[] curNode = sorted.get(i);
+                if (!G.containsKey(curNode[0].getID())) {
+                    G.put(curNode[0].getID(), new LinkedList<ComputerNode>());
+                }
+                if (!G.containsKey(curNode[1].getID())) {
+                    G.put(curNode[1].getID(), new LinkedList<ComputerNode>());
+                }
+
+                ComputerNode cn1 = sorted.get(i)[0];
+                ComputerNode cn2 = sorted.get(i)[1];
+                cn1.addNeighbor(cn1);
+                cn2.addNeighbor(cn2);
+                LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>) G.get(curNode[0].getID());
+                LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(curNode[1].getID());
+                int size1 = list1.size();
+                int size2 = list2.size();
+                list1.add(cn1);
+                list2.add(cn2);
+                if (size1 > 1) {
+                    cn1.addNeighbor(sorted.get(i - 1)[0]);
+                }
+                if (size2 > 1) {
+                    cn1.addNeighbor(sorted.get(i - 1)[1]);
+                }
             }
-            if (!G.containsKey(curNode[1].getID())){
-                G.put(curNode[1].getID(), new LinkedList<ComputerNode>());
-            }
-            ComputerNode cn1 = E.get(i)[0];
-            ComputerNode cn2 = E.get(i)[1];
-            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>)G.get(curNode[0].getID());
-            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>)G.get(curNode[1].getID());
-            int size1 = list1.size();
-            int size2 = list2.size();
-            list1.add(cn1);
-            list2.add(cn2);
-            if (size1 > 1){
-                cn1.addNeighbor(sorted.get(i-1)[0]);
-            }
-            if (size2 > 1){
-                cn1.addNeighbor(sorted.get(i-1)[1]);
-            }
+        }else{
+            System.err.println("According to the PDF, this method can't be called more than once.");
         }
-
     }
 
     public static ArrayList<ComputerNode[]> quickSort(ArrayList<ComputerNode[]> computerNodeList, int first, int last) {
@@ -80,8 +89,6 @@ public class CommunicationsMonitor {
         ComputerNode b = new ComputerNode(c2,timestamp);
         E.add(new ComputerNode[]{a, b});
 
-        a.addNeighbor(b);
-        b.addNeighbor(a);
 
     }
 
