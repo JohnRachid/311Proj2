@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,17 +39,18 @@ public class CommunicationsMonitor {
                 LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(curNode[1].getID());
                 int size1 = list1.size();
                 int size2 = list2.size();
-                list1.add(cn1);
-                list2.add(cn2);
-
                 if (size1 >= 1 && G.get(cn1.getID()).get(size1-1).getTimestamp() == cn1.getTimestamp()) {
-                    list1.remove(cn1);
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn2);
+                }else{
+                    list1.add(cn1);
                 }
                 if (size2 >= 1 && G.get(cn2.getID()).get(size2-1).getTimestamp() == cn2.getTimestamp()) {
-                    list1.remove(cn2);
                     G.get(cn2.getID()).get(size2-1).addNeighbor(cn1);
+                }else{
+                    list2.add(cn2);
                 }
+
+
                 if (size1 >= 1) {
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
                 }
