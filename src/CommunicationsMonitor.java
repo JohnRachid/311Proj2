@@ -21,8 +21,7 @@ public class CommunicationsMonitor {
     public void createGraph(){
         if (!calledCreateGraph) {
             calledCreateGraph = true;
-            ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>) E.clone();
-            sorted = quickSort(sorted, 0, sorted.size() - 1);
+            ArrayList<ComputerNode[]> sorted = quickSort(E, 0, E.size() - 1);
 
             for (int i = 0; i < sorted.size(); i++) {
                 ComputerNode[] curNode = sorted.get(i);
@@ -33,18 +32,31 @@ public class CommunicationsMonitor {
                     G.put(curNode[1].getID(), new LinkedList<ComputerNode>());
                 }
 
-                ComputerNode cn1 = sorted.get(i)[0];
-                ComputerNode cn2 = sorted.get(i)[1];
-                cn1.addNeighbor(cn2);
-                cn2.addNeighbor(cn1);
                 LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>) G.get(curNode[0].getID());
                 LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(curNode[1].getID());
                 int size1 = list1.size();
                 int size2 = list2.size();
-                list1.add(cn1);
-                list2.add(cn2);
+
+                ComputerNode cn1 = curNode[0];
+                ComputerNode cn2 = curNode[1];
+                
+                ComputerNode cn1P = null;
+                ComputerNode cn2P = null;
+
+                if (size1 >= 1)
+                    cn1P = G.get(cn1.getID()).get(size1-1);
+                if (size2 >= 1)
+                    cn2P = G.get(cn2.getID()).get(size2-1);
+
+                if (cn1P == null || (cn1P != null && !cn1P.equals(cn1)))
+                    list1.add(cn1);
+
+                if (cn2P == null || (cn2P != null && !cn2P.equals(cn2)))
+                    list2.add(cn2);
+
                 if (size1 >= 1) {
-                    G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
+                    ComputerNode nodeToAdd = G.get(cn1.getID()).get(size1-1);
+                    nodeToAdd.addNeighbor(cn1);
                 }
                 if (size2 >= 1) {
                     G.get(cn2.getID()).get(size2-1).addNeighbor(cn2);
