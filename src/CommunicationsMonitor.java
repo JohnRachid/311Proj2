@@ -7,36 +7,36 @@ public class CommunicationsMonitor {
     public ArrayList<ComputerNode[]> E;
 
 
-    public CommunicationsMonitor(){
+    public CommunicationsMonitor() {
         G = new HashMap<Integer, List<ComputerNode>>();
         E = new ArrayList<ComputerNode[]>();
         ArrayList computerNodeList = new ArrayList<ComputerNode>();
     }
 
-    public void createGraph(){
-        ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>)E.clone();
-        sorted = quickSort(sorted, 0, sorted.size()-1);
+    public void createGraph() {
+        ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>) E.clone();
+        sorted = quickSort(sorted, 0, sorted.size() - 1);
 
-        for (int i = 0; i < sorted.size(); i++){
-            if (!G.containsKey(sorted.get(i)[0])){
+        for (int i = 0; i < sorted.size(); i++) {
+            if (!G.containsKey(sorted.get(i)[0])) {
                 G.put(sorted.get(i)[0].getID(), new LinkedList<ComputerNode>());
             }
-            if (!G.containsKey(sorted.get(i)[1])){
+            if (!G.containsKey(sorted.get(i)[1])) {
                 G.put(sorted.get(i)[1].getID(), new LinkedList<ComputerNode>());
             }
             ComputerNode cn1 = E.get(i)[0];
             ComputerNode cn2 = E.get(i)[1];
-            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>)G.get(i);
-            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>)G.get(i);
+            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>) G.get(i);
+            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(i);
             int size1 = list1.size();
             int size2 = list2.size();
             list1.add(cn1);
             list2.add(cn2);
-            if (size1 > 1){
-                cn1.addNeighbor(sorted.get(i-1)[0]);
+            if (size1 > 1) {
+                cn1.addNeighbor(sorted.get(i - 1)[0]);
             }
-            if (size2 > 1){
-                cn1.addNeighbor(sorted.get(i-1)[0]);
+            if (size2 > 1) {
+                cn1.addNeighbor(sorted.get(i - 1)[0]);
             }
         }
 
@@ -71,9 +71,9 @@ public class CommunicationsMonitor {
         return i;
     }
 
-    public void addCommunication(int c1, int c2, int timestamp){
-        ComputerNode a = new ComputerNode(c1,timestamp);
-        ComputerNode b = new ComputerNode(c2,timestamp);
+    public void addCommunication(int c1, int c2, int timestamp) {
+        ComputerNode a = new ComputerNode(c1, timestamp);
+        ComputerNode b = new ComputerNode(c2, timestamp);
         E.add(new ComputerNode[]{a, b});
 
         a.addNeighbor(b);
@@ -81,32 +81,29 @@ public class CommunicationsMonitor {
 
     }
 
-    public List<ComputerNode> queryInfection(int c1, int c2, int x, int y){
+    public List<ComputerNode> queryInfection(int c1, int c2, int x, int y) {
         if (G.get(c1) != null) {
             ComputerNode startNode = G.get(c1).get(0);
             List<ComputerNode> Q = new LinkedList<>();
             List<ComputerNode> path = new LinkedList<>();
             Q.add(startNode);
             ComputerNode current;
-            int key = 0;
-            while (G.get(key) != null) {
-                for (ComputerNode node : G.get(key)) {
-                    node.visited = false;
-                }
-                while (!Q.isEmpty()) {
-                    current = Q.remove(0);
-                    current.visited = true;
-                    path.add(current);
-                    for (ComputerNode neighbor : current.getNeighbors()) {
-                        if (!neighbor.visited && neighbor.getTimestamp() >= current.getTimestamp()
-                                              && neighbor.getTimestamp() >= x
-                                              && neighbor.getTimestamp() <= y) {
-                            neighbor.visited = true;
-                            Q.add(neighbor);
+            Q.add(startNode);
+            while (!Q.isEmpty()) {
+                current = Q.remove(0);
+                current.visited = true;
+                path.add(current);
+                for (ComputerNode neighbor : current.getNeighbors()) {
+                    if (!neighbor.visited && neighbor.getTimestamp() >= current.getTimestamp()
+                            && neighbor.getTimestamp() >= x
+                            && neighbor.getTimestamp() <= y) {
+                        Q.add(neighbor);
+                    }
+                    if (current.getID() == c2) {
+                        for (int i = 0; i < path.size(); i++) {
+                            path.get(i).visited = false;
                         }
-                        if (current.getID() == c2) {
-                            return path;
-                        }
+                        return path;
                     }
                 }
             }
@@ -114,11 +111,11 @@ public class CommunicationsMonitor {
         return null;
     }
 
-    public HashMap<Integer, List<ComputerNode>> getComputerMapping(){
+    public HashMap<Integer, List<ComputerNode>> getComputerMapping() {
         return G;
     }
 
-    public List<ComputerNode> getComputerMapping(int c){
+    public List<ComputerNode> getComputerMapping(int c) {
         return null;
     }
 
