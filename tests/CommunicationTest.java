@@ -134,6 +134,7 @@ public class CommunicationTest {
 	public void testQueryInfectionExample1() {
 		cm.createGraph();
 		List<ComputerNode> path = cm.queryInfection(1, 3, 2, 9);
+		System.out.println(path);
 		HashMap<Integer, List<ComputerNode>> adjList = cm.getComputerMapping();
 		
 		assertEquals(adjList.get(1).get(0), path.get(0));
