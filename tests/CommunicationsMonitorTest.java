@@ -1,6 +1,8 @@
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommunicationsMonitorTest {
@@ -29,106 +31,105 @@ public class CommunicationsMonitorTest {
         assertEquals(1, monitor.getE().size());
     }
 
-//    @Test
-//    public void createGraphExampleOne() {
-//        // Create graph from example 1
-//        monitor = createExampleOne();
-//
-//        // Test that array was sorted
-//        List<CommunicationTriple> commList =
-//                monitor.getCommunicationList();
-//        assertEquals(4, commList.get(0).getTk());
-//        assertEquals(8, commList.get(1).getTk());
-//        assertEquals(8, commList.get(2).getTk());
-//        assertEquals(12, commList.get(3).getTk());
-//
-//        // Test that all computers are initialized in HashMap
-//        assertTrue(monitor.getComputerMapping(1) != null);
-//        assertTrue(monitor.getComputerMapping(2) != null);
-//        assertTrue(monitor.getComputerMapping(3) != null);
-//        assertTrue(monitor.getComputerMapping(4) != null);
-//        assertTrue(monitor.getComputerMapping(5) == null);
-//
-//        // Test C1 HashMap
-//        List<ComputerNode> c1Mapping = monitor.getComputerMapping(1);
-//        assertEquals(2, c1Mapping.size());
-//        ComputerNode c1Four = c1Mapping.get(0);
-//        ComputerNode c1Twelve = c1Mapping.get(1);
-//        assertEquals(1, c1Four.getID());
-//        assertEquals(4, c1Four.getTimestamp());
-//        assertEquals(1, c1Twelve.getID());
-//        assertEquals(12, c1Twelve.getTimestamp());
-//
-//        // Test (C1, 4) Neighbors
-//        assertEquals(2, c1Four.getOutNeighbors().size());
-//        assertEquals(2, c1Four.getOutNeighbors().get(0).getID());
-//        assertEquals(4, c1Four.getOutNeighbors().get(0).getTimestamp());
-//        assertEquals(1, c1Four.getOutNeighbors().get(1).getID());
-//        assertEquals(12, c1Four.getOutNeighbors().get(1).getTimestamp());
-//
-//        // Test (C1, 12) Neighbors
-//        assertEquals(1, c1Twelve.getOutNeighbors().size());
-//        assertEquals(4, c1Twelve.getOutNeighbors().get(0).getID());
-//        assertEquals(12, c1Twelve.getOutNeighbors().get(0).getTimestamp());
-//
-//        // Test C2 HashMap
-//        List<ComputerNode> c2Mapping = monitor.getComputerMapping(2);
-//        assertEquals(2, c2Mapping.size());
-//        ComputerNode c2Four = c2Mapping.get(0);
-//        ComputerNode c2Eight = c2Mapping.get(1);
-//        assertEquals(2, c2Four.getID());
-//        assertEquals(4, c2Four.getTimestamp());
-//        assertEquals(2, c2Eight.getID());
-//        assertEquals(8, c2Eight.getTimestamp());
-//
-//        // Test (C2, 4) Neighbors
-//        assertEquals(2, c2Four.getOutNeighbors().size());
-//        assertEquals(1, c2Four.getOutNeighbors().get(0).getID());
-//        assertEquals(4, c2Four.getOutNeighbors().get(0).getTimestamp());
-//        assertEquals(2, c2Four.getOutNeighbors().get(1).getID());
-//        assertEquals(8, c2Four.getOutNeighbors().get(1).getTimestamp());
-//
-//        // Test (C2, 8) Neighbors
-//        assertEquals(1, c2Eight.getOutNeighbors().size());
-//        assertEquals(4, c2Eight.getOutNeighbors().get(0).getID());
-//        assertEquals(8, c2Eight.getOutNeighbors().get(0).getTimestamp());
-//
-//        // Test C3 HashMap
-//        List<ComputerNode> c3Mapping = monitor.getComputerMapping(3);
-//        assertEquals(1, c3Mapping.size());
-//        ComputerNode c3Eight = c3Mapping.get(0);
-//        assertEquals(3, c3Eight.getID());
-//        assertEquals(8, c3Eight.getTimestamp());
-//
-//        // Test (C3, 8) Neighbors
-//        assertEquals(1, c3Eight.getOutNeighbors().size());
-//        assertEquals(4, c3Eight.getOutNeighbors().get(0).getID());
-//        assertEquals(8, c3Eight.getOutNeighbors().get(0).getTimestamp());
-//
-//        // Test C4 HashMap
-//        List<ComputerNode> c4Mapping = monitor.getComputerMapping(4);
-//        assertEquals(2, c4Mapping.size());
-//        ComputerNode c4Eight = c4Mapping.get(0);
-//        ComputerNode c4Twelve = c4Mapping.get(1);
-//        assertEquals(4, c4Eight.getID());
-//        assertEquals(8, c4Eight.getTimestamp());
-//        assertEquals(4, c4Twelve.getID());
-//        assertEquals(12, c4Twelve.getTimestamp());
-//
-//        // Test (C4, 8) Neighbors
-//        assertEquals(3, c4Eight.getOutNeighbors().size());
-//        assertEquals(2, c4Eight.getOutNeighbors().get(0).getID());
-//        assertEquals(8, c4Eight.getOutNeighbors().get(0).getTimestamp());
-//        assertEquals(3, c4Eight.getOutNeighbors().get(1).getID());
-//        assertEquals(8, c4Eight.getOutNeighbors().get(1).getTimestamp());
-//        assertEquals(4, c4Eight.getOutNeighbors().get(2).getID());
-//        assertEquals(12, c4Eight.getOutNeighbors().get(2).getTimestamp());
-//
-//        // Test (C4, 12) Neighbors
-//        assertEquals(1, c4Twelve.getOutNeighbors().size());
-//        assertEquals(1, c4Twelve.getOutNeighbors().get(0).getID());
-//        assertEquals(12, c4Twelve.getOutNeighbors().get(0).getTimestamp());
-//    }
+    @Test
+    public void createGraphExampleOne() {
+        // Create graph from example 1
+        monitor = createExampleOne();
+
+        // Test that array was sorted
+        ArrayList<ComputerNode[]> commList = monitor.getE();
+        assertEquals(4, commList.get(0)[0].getTimestamp());
+        assertEquals(8, commList.get(1)[0].getTimestamp());
+        assertEquals(8, commList.get(2)[0].getTimestamp());
+        assertEquals(12, commList.get(3)[0].getTimestamp());
+
+        // Test that all computers are initialized in HashMap
+        assertTrue(monitor.getComputerMapping(1) != null);
+        assertTrue(monitor.getComputerMapping(2) != null);
+        assertTrue(monitor.getComputerMapping(3) != null);
+        assertTrue(monitor.getComputerMapping(4) != null);
+        assertTrue(monitor.getComputerMapping(5) == null);
+
+        // Test C1 HashMap
+        List<ComputerNode> c1Mapping = monitor.getComputerMapping(1);
+        assertEquals(2, c1Mapping.size());
+        ComputerNode c1Four = c1Mapping.get(0);
+        ComputerNode c1Twelve = c1Mapping.get(1);
+        assertEquals(1, c1Four.getID());
+        assertEquals(4, c1Four.getTimestamp());
+        assertEquals(1, c1Twelve.getID());
+        assertEquals(12, c1Twelve.getTimestamp());
+
+        // Test (C1, 4) Neighbors
+        assertEquals(2, c1Four.getOutNeighbors().size());
+        assertEquals(2, c1Four.getOutNeighbors().get(0).getID());
+        assertEquals(4, c1Four.getOutNeighbors().get(0).getTimestamp());
+        assertEquals(1, c1Four.getOutNeighbors().get(1).getID());
+        assertEquals(12, c1Four.getOutNeighbors().get(1).getTimestamp());
+
+        // Test (C1, 12) Neighbors
+        assertEquals(1, c1Twelve.getOutNeighbors().size());
+        assertEquals(4, c1Twelve.getOutNeighbors().get(0).getID());
+        assertEquals(12, c1Twelve.getOutNeighbors().get(0).getTimestamp());
+
+        // Test C2 HashMap
+        List<ComputerNode> c2Mapping = monitor.getComputerMapping(2);
+        assertEquals(2, c2Mapping.size());
+        ComputerNode c2Four = c2Mapping.get(0);
+        ComputerNode c2Eight = c2Mapping.get(1);
+        assertEquals(2, c2Four.getID());
+        assertEquals(4, c2Four.getTimestamp());
+        assertEquals(2, c2Eight.getID());
+        assertEquals(8, c2Eight.getTimestamp());
+
+        // Test (C2, 4) Neighbors
+        assertEquals(2, c2Four.getOutNeighbors().size());
+        assertEquals(1, c2Four.getOutNeighbors().get(0).getID());
+        assertEquals(4, c2Four.getOutNeighbors().get(0).getTimestamp());
+        assertEquals(2, c2Four.getOutNeighbors().get(1).getID());
+        assertEquals(8, c2Four.getOutNeighbors().get(1).getTimestamp());
+
+        // Test (C2, 8) Neighbors
+        assertEquals(1, c2Eight.getOutNeighbors().size());
+        assertEquals(4, c2Eight.getOutNeighbors().get(0).getID());
+        assertEquals(8, c2Eight.getOutNeighbors().get(0).getTimestamp());
+
+        // Test C3 HashMap
+        List<ComputerNode> c3Mapping = monitor.getComputerMapping(3);
+        assertEquals(1, c3Mapping.size());
+        ComputerNode c3Eight = c3Mapping.get(0);
+        assertEquals(3, c3Eight.getID());
+        assertEquals(8, c3Eight.getTimestamp());
+
+        // Test (C3, 8) Neighbors
+        assertEquals(1, c3Eight.getOutNeighbors().size());
+        assertEquals(4, c3Eight.getOutNeighbors().get(0).getID());
+        assertEquals(8, c3Eight.getOutNeighbors().get(0).getTimestamp());
+
+        // Test C4 HashMap
+        List<ComputerNode> c4Mapping = monitor.getComputerMapping(4);
+        assertEquals(2, c4Mapping.size());
+        ComputerNode c4Eight = c4Mapping.get(0);
+        ComputerNode c4Twelve = c4Mapping.get(1);
+        assertEquals(4, c4Eight.getID());
+        assertEquals(8, c4Eight.getTimestamp());
+        assertEquals(4, c4Twelve.getID());
+        assertEquals(12, c4Twelve.getTimestamp());
+
+        // Test (C4, 8) Neighbors
+        assertEquals(3, c4Eight.getOutNeighbors().size());
+        assertEquals(2, c4Eight.getOutNeighbors().get(0).getID());
+        assertEquals(8, c4Eight.getOutNeighbors().get(0).getTimestamp());
+        assertEquals(3, c4Eight.getOutNeighbors().get(1).getID());
+        assertEquals(8, c4Eight.getOutNeighbors().get(1).getTimestamp());
+        assertEquals(4, c4Eight.getOutNeighbors().get(2).getID());
+        assertEquals(12, c4Eight.getOutNeighbors().get(2).getTimestamp());
+
+        // Test (C4, 12) Neighbors
+        assertEquals(1, c4Twelve.getOutNeighbors().size());
+        assertEquals(1, c4Twelve.getOutNeighbors().get(0).getID());
+        assertEquals(12, c4Twelve.getOutNeighbors().get(0).getTimestamp());
+    }
 
     @Test
     public void queryInfectionExampleOne() {
