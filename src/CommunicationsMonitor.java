@@ -86,6 +86,32 @@ public class CommunicationsMonitor {
     }
 
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y){
+        if (G.get(c1) != null) {
+            ComputerNode startNode = G.get(c1).get(0);
+            List<ComputerNode> Q = new LinkedList<>();
+            List<ComputerNode> path = new LinkedList<>();
+            Q.add(startNode);
+            ComputerNode current;
+            Q.add(startNode);
+            while (!Q.isEmpty()) {
+                current = Q.remove(0);
+                current.visited = true;
+                path.add(current);
+                for (ComputerNode neighbor : current.getNeighbors()) {
+                    if (!neighbor.visited && neighbor.getTimestamp() >= current.getTimestamp()
+                            && neighbor.getTimestamp() >= x
+                            && neighbor.getTimestamp() <= y) {
+                        Q.add(neighbor);
+                    }
+                    for (ComputerNode node : path) {
+                        node.visited = false;
+                    }
+                    if (current.getID() == c2) {
+                        return path;
+                    }
+                }
+            }
+        }
         return null;
     }
 
