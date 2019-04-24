@@ -44,10 +44,10 @@ public class CommunicationsMonitor {
                 list1.add(cn1);
                 list2.add(cn2);
                 if (size1 > 1) {
-                    cn1.addNeighbor(sorted.get(i - 1)[0]);
+                    cn1.addNeighbor(G.get(cn1.getID()).get(size1-2));
                 }
                 if (size2 > 1) {
-                    cn2.addNeighbor(sorted.get(i - 1)[1]);
+                    cn2.addNeighbor(G.get(cn2.getID()).get(size2-2));
                 }
             }
         }else{
