@@ -103,10 +103,10 @@ public class CommunicationsMonitor {
                             && neighbor.getTimestamp() <= y) {
                         Q.add(neighbor);
                     }
-                    for (ComputerNode node : path) {
-                        node.visited = false;
-                    }
                     if (current.getID() == c2) {
+                        for (int i = 0; i < path.size(); i++) {
+                            path.get(i).visited = false;
+                        }
                         return path;
                     }
                 }
