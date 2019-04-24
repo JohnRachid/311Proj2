@@ -28,15 +28,9 @@ public class CreateGraphTests {
         nodes.add(new ComputerNode[] {cn7, cn8});
         nodes.add(new ComputerNode[] {cn9, cn10});
         nodes.add(new ComputerNode[] {cn11, cn12});
-        for (ComputerNode[] cnArr : nodes){
-            System.out.println(cnArr[0] + ", " + cnArr[1]);
-        }
-        System.out.println();
+
         CommunicationsMonitor cm = new CommunicationsMonitor();
         nodes = cm.quickSort(nodes, 0, nodes.size() - 1);
-        for (ComputerNode[] cnArr : nodes){
-            System.out.println(cnArr[0] + ", " + cnArr[1]);
-        }
         assertEquals(9, nodes.get(0)[0].getID());
     }
 
@@ -64,7 +58,22 @@ public class CreateGraphTests {
         dad.add(new ComputerNode[] {cn9, cn10});
         dad.add(new ComputerNode[] {cn11, cn12});
         cm.createGraph();
-        cm.printMap();
         assertEquals(12, cm.E.size() * 2);
+    }
+
+    @Test
+    public void runtimeTest1(){
+        int maxC = 10000;
+        int maxT = 2500;
+        CommunicationsMonitor cm = new CommunicationsMonitor();
+        ArrayList<ComputerNode[]> nodes = cm.getE();
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++){
+            nodes.add(TripleGenerator.generateTripleRand(maxC, maxT));
+        }
+        cm.createGraph();
+        long duration = System.currentTimeMillis() - start;
+        System.out.println(duration);
+        assertEquals(true, duration <= 3000);
     }
 }
