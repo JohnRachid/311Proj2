@@ -21,8 +21,14 @@ public class CommunicationsMonitor {
         }
     }
 
-    public ArrayList<ComputerNode> quicksort(ArrayList<ComputerNode> computerNodeList){
-        return null;
+    public static ArrayList<ComputerNode> quickSort(ArrayList<ComputerNode> computerNodeList, int first, int last) {
+        if (first >= last) {
+            return computerNodeList;
+        }
+        int p = partition(computerNodeList, first, last);
+        computerNodeList = quickSort(computerNodeList, first, p - 1);
+        computerNodeList = quickSort(computerNodeList, p + 1, last);
+        return computerNodeList;
     }
 
     public static int partition(ArrayList<ComputerNode> computerNodeList, int first, int last) {

@@ -8,6 +8,10 @@ public class ComputerNode {
         timestamp = newTimestamp;
     }
 
+    public String toString(){
+        return id + " " + timestamp;
+    }
+
     int getID(){
         return id;
     }
