@@ -35,8 +35,8 @@ public class CommunicationsMonitor {
 
                 ComputerNode cn1 = sorted.get(i)[0];
                 ComputerNode cn2 = sorted.get(i)[1];
-                cn1.addNeighbor(cn1);
-                cn2.addNeighbor(cn2);
+                cn1.addNeighbor(cn2);
+                cn2.addNeighbor(cn1);
                 LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>) G.get(curNode[0].getID());
                 LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(curNode[1].getID());
                 int size1 = list1.size();

@@ -14,17 +14,17 @@ import org.junit.Test;
 public class CommunicationTest {
 	
 	CommunicationsMonitor cm;
-//	ArrayList<Triplet> communications;
-//
-//	@Before
-//	public void before() {
-//		cm = new CommunicationsMonitor();
-//		cm.addCommunication(1, 2, 4);
-//		cm.addCommunication(2, 4, 8);
-//		cm.addCommunication(3, 4, 8);
-//		cm.addCommunication(1, 4, 12);
-//		communications = (ArrayList<Triplet>) cm.getCommunications();
-//	}
+	ArrayList<ComputerNode[]> communications;
+
+	@Before
+	public void before() {
+		cm = new CommunicationsMonitor();
+		cm.addCommunication(1, 2, 4);
+		cm.addCommunication(2, 4, 8);
+		cm.addCommunication(3, 4, 8);
+		cm.addCommunication(1, 4, 12);
+		communications = cm.E;
+	}
 	
 	@Test
 	public void testComputerNodeEquality() {
