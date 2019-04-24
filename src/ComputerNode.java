@@ -2,14 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ComputerNode {
+
     private int id;
     private int timestamp;
+    public boolean visited;
     public ArrayList<ComputerNode> neighbors;
 
     ComputerNode(int newID, int newTimestamp){
         id = newID;
         timestamp = newTimestamp;
         ArrayList<ComputerNode> neighbors = new ArrayList<ComputerNode>();
+        visited = false;
     }
 
     public String toString(){
