@@ -67,7 +67,7 @@ public class InfectionQueueTests {
         monitor.addCommunication(3, 4, 8);
         monitor.addCommunication(1, 4, 12);
         monitor.createGraph();
-
+        monitor.printMap();
         List<ComputerNode> results = monitor.queryInfection(1, 3, 2, 8);
         System.out.println(results);
     }
