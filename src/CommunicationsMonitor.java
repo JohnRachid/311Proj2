@@ -17,14 +17,21 @@ public class CommunicationsMonitor {
     }
 
     public void createGraph(){
-//        ArrayList<ComputerNode> sorted = (ArrayList<ComputerNode>)computerNodeList.clone();
-//        sorted = quickSort(sorted, 0, sorted.size()-1);
-//
-//       // for (int i = 0; i < )
+        ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>)E.clone();
+        sorted = quickSort(sorted, 0, sorted.size()-1);
+
+        for (int i = 0; i < sorted.size(); i++){
+            if (!G.containsKey(sorted.get(i)[0])){
+                G.put(sorted.get(i)[0].getID(), new LinkedList<ComputerNode>());
+            }
+            if (!G.containsKey(sorted.get(i)[1])){
+                G.put(sorted.get(i)[1].getID(), new LinkedList<ComputerNode>());
+            }
+        }
 
     }
 
-    public static ArrayList<ComputerNode> quickSort(ArrayList<ComputerNode> computerNodeList, int first, int last) {
+    public static ArrayList<ComputerNode[]> quickSort(ArrayList<ComputerNode[]> computerNodeList, int first, int last) {
         if (first >= last) {
             return computerNodeList;
         }
@@ -34,28 +41,22 @@ public class CommunicationsMonitor {
         return computerNodeList;
     }
 
-    private static int partition(ArrayList<ComputerNode> computerNodeList, int first, int last) {
-        ComputerNode pivot = computerNodeList.get(last);
+    private static int partition(ArrayList<ComputerNode[]> computerNodeList, int first, int last) {
+        ComputerNode[] pivot = computerNodeList.get(last);
         int j = first;
         int i = first - 1;
         for (; j < last; j++) {
-            if (computerNodeList.get(j).getTimestamp() <= pivot.getTimestamp()) {
+            if (computerNodeList.get(j)[0].getTimestamp() <= pivot[0].getTimestamp()) {
                 i++;
-                ComputerNode temp = computerNodeList.get(i);
+                ComputerNode[] temp = computerNodeList.get(i);
                 computerNodeList.set(i, computerNodeList.get(j));
-                computerNodeList.set(i, temp);
+                computerNodeList.set(j, temp);
             }
         }
-        ComputerNode temp = computerNodeList.get(last);
         i++;
-        ComputerNode next = computerNodeList.get(i);
-        for (int k = i; k < last; k++) {
-            temp = computerNodeList.get(k+1);
-            computerNodeList.set(k+1, next);
-            next = temp;
-        }
+        ComputerNode[] next = computerNodeList.get(i);
         computerNodeList.set(i, pivot);
-        int[][] output = new int[2][];
+        computerNodeList.set(last, next);
         return i;
     }
 
