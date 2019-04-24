@@ -6,6 +6,7 @@ public class ComputerNode {
     private int id;
     private int timestamp;
     public boolean visited;
+    public ComputerNode pred;
     public ArrayList<ComputerNode> neighbors;
 
     ComputerNode(int newID, int newTimestamp){
@@ -13,6 +14,7 @@ public class ComputerNode {
         timestamp = newTimestamp;
         neighbors = new ArrayList<ComputerNode>();
         visited = false;
+        pred = null;
     }
 
     public String toString(){
