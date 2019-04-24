@@ -21,16 +21,17 @@ public class CommunicationsMonitor {
         sorted = quickSort(sorted, 0, sorted.size()-1);
 
         for (int i = 0; i < sorted.size(); i++){
-            if (!G.containsKey(sorted.get(i)[0])){
-                G.put(sorted.get(i)[0].getID(), new LinkedList<ComputerNode>());
+            ComputerNode[] curNode = sorted.get(i);
+            if (!G.containsKey(curNode[0].getID())){
+                G.put(curNode[0].getID(), new LinkedList<ComputerNode>());
             }
-            if (!G.containsKey(sorted.get(i)[1])){
-                G.put(sorted.get(i)[1].getID(), new LinkedList<ComputerNode>());
+            if (!G.containsKey(curNode[1].getID())){
+                G.put(curNode[1].getID(), new LinkedList<ComputerNode>());
             }
             ComputerNode cn1 = E.get(i)[0];
             ComputerNode cn2 = E.get(i)[1];
-            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>)G.get(i);
-            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>)G.get(i);
+            LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>)G.get(curNode[0].getID());
+            LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>)G.get(curNode[1].getID());
             int size1 = list1.size();
             int size2 = list2.size();
             list1.add(cn1);
@@ -39,7 +40,7 @@ public class CommunicationsMonitor {
                 cn1.addNeighbor(sorted.get(i-1)[0]);
             }
             if (size2 > 1){
-                cn1.addNeighbor(sorted.get(i-1)[0]);
+                cn1.addNeighbor(sorted.get(i-1)[1]);
             }
         }
 
@@ -94,6 +95,17 @@ public class CommunicationsMonitor {
 
     public List<ComputerNode> getComputerMapping(int c){
         return null;
+    }
+
+    public void printMap(){
+        for (Integer i : G.keySet()){
+            LinkedList<ComputerNode> list = (LinkedList<ComputerNode>)G.get(i);
+            for (int j = 0; j < list.size(); j++){
+                ComputerNode node = list.get(j);
+                System.out.print("(" + node + "), ");
+            }
+            System.out.println();
+        }
     }
 
 //    public void bfs(int start) {
