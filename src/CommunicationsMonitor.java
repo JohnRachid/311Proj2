@@ -116,6 +116,14 @@ public class CommunicationsMonitor {
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y){
         if (G.get(c1) != null) {
             ComputerNode startNode = G.get(c1).get(0);
+            int currentPlace = 1;
+            while(!(startNode.getTimestamp() >= x && startNode.getTimestamp() <= y) && currentPlace < G.get(c1).size()) {
+                startNode = G.get(c1).get(currentPlace);
+                currentPlace++;
+                if (currentPlace >= G.get(c1).size()) {
+                    return null;
+                }
+            }
             List<ComputerNode> Q = new LinkedList<>();
             List<ComputerNode> path = new LinkedList<>();
             ComputerNode current;
