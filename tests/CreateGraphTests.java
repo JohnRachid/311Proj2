@@ -91,4 +91,32 @@ public class CreateGraphTests {
         assertEquals(true, duration <= 3000);
 
     }
+
+    @Test
+    public void runtimeTest2(){
+        int maxC = 100;
+        int maxT = 100;
+        CommunicationsMonitor cm = new CommunicationsMonitor();
+        ComputerNode startNode = null;
+        ComputerNode endNode = null;
+        long start = System.currentTimeMillis();
+        int max = 200000;
+        for (int i = 0; i < max; i++){
+            ComputerNode[] n = TripleGenerator.generateTripleRand(maxC, maxT);
+            cm.addCommunication(n[0].getID(), n[1].getID(), n[0].getTimestamp());
+
+            if (i == 0){
+                startNode = n[0];
+            }else if (i == max-1){
+                endNode = n[1];
+            }
+        }
+        cm.createGraph();
+        System.out.println(System.currentTimeMillis() - start);
+        LinkedList<ComputerNode> dad = ( LinkedList<ComputerNode>)cm.queryInfection(startNode.getID(), endNode.getID(), startNode.getTimestamp(), endNode.getTimestamp());
+        long duration = System.currentTimeMillis() - start;
+        System.out.println(duration);
+        System.out.println(dad);
+        assertEquals(true, duration <= 3000);
+    }
 }
