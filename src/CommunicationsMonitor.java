@@ -132,7 +132,6 @@ public class CommunicationsMonitor {
                 current = Q.remove(0);
                 current.visited = true;
                 path.add(current);
-                System.out.println("Current Neighbors for " + current.getID() + ": " + current.getNeighbors());
                 for (ComputerNode neighbor : current.getNeighbors()) {
                     if (!neighbor.visited && neighbor.getTimestamp() >= current.getTimestamp()
                             && neighbor.getTimestamp() >= x
