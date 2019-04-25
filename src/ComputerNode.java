@@ -34,6 +34,9 @@ public class ComputerNode {
     }
 
     public void addNeighbor(ComputerNode node){
+        if (neighbors.size() >= 1 && neighbors.get(neighbors.size() - 1).equals(node)) {
+            return;
+        }
         neighbors.add(node);
     }
 
