@@ -116,14 +116,25 @@ public class CommunicationsMonitor {
                             && neighbor.getTimestamp() >= x
                             && neighbor.getTimestamp() <= y) {
                         Q.add(neighbor);
+                        neighbor.pred = current;
                     }
                     if (current.getID() == c2) {
                         for (int i = 0; i < path.size(); i++) {
                             path.get(i).visited = false;
                         }
-                        return path;
+                        List<ComputerNode> finalPath = new LinkedList<ComputerNode>();
+                        ComputerNode travNode = current;
+                        finalPath.add(0, travNode);
+                        while (travNode.pred != null) {
+                            finalPath.add(0, travNode.pred);
+                            travNode = travNode.pred;
+                        }
+                        return finalPath;
                     }
                 }
+            }
+            for (int i = 0; i < path.size(); i++) {
+                path.get(i).visited = false;
             }
         }
         return null;
