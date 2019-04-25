@@ -34,6 +34,11 @@ public class ComputerNode {
     }
 
     public void addNeighbor(ComputerNode node){
+        for (int i = 0; i < neighbors.size(); i++) {
+            if (neighbors.get(i).equals(node)) {
+                return;
+            }
+        }
         neighbors.add(node);
     }
 

@@ -108,6 +108,7 @@ public class CommunicationTest {
 		assertEquals(2, c4.size());
 			//C4[0]
 		List<ComputerNode> c4Neighbors = c4.get(0).getOutNeighbors();
+		System.out.println(c4.get(0).getOutNeighbors());
 		assertEquals(3, c4Neighbors.size());
 		assertEquals(2, c4Neighbors.get(0).getID());
 		assertEquals(8, c4Neighbors.get(0).getTimestamp());

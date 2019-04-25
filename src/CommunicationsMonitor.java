@@ -54,18 +54,17 @@ public class CommunicationsMonitor {
                     list2.add(cn2);
                 }
 
-                if (size1 >= 1 && !(G.get(cn1.getID()).get(size1-1).equals(cn1))) {
+                if (size1 >= 1 && !(G.get(cn1.getID()).get(size1-1).equals(cn1)) && !(G.get(cn1.getID()).get(size1-1).getNeighbors().contains(cn1))) {
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
                 }
-                if (size2 >= 1 && !(G.get(cn2.getID()).get(size2-1).equals(cn2))) {
+                if (size2 >= 1 && !(G.get(cn2.getID()).get(size2-1).equals(cn2)) && !(G.get(cn2.getID()).get(size2-1).getNeighbors().contains(cn2))) {
                     G.get(cn2.getID()).get(size2-1).addNeighbor(cn2);
                 }
             }
         }else{
             System.err.println("According to the PDF, this method can't be called more than once.");
         }
-        System.out.println("3: " + G.get(3).get(0));
-        System.out.println("3 Neighbors: " + G.get(3).get(0).getNeighbors().get(0).getNeighbors());
+
     }
 
     public void handleNeighbors(ComputerNode cn1, ComputerNode cn2, int size1, int size2)
