@@ -129,6 +129,8 @@ public class TestCommunicationsMonitor1 {
     @Test
     public void testQuery3() {
         List<ComputerNode> result = monitor.queryInfection(3, 1, 8, 12);
+
+        System.out.println(result);
         assertNotNull("Result should not be null. An infection path exists when 3 is infected at t=8 and 1 by t=12", result);
 
         List<ComputerNode> expected = new LinkedList<>();

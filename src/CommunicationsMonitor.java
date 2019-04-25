@@ -22,6 +22,7 @@ public class CommunicationsMonitor {
             ArrayList<ComputerNode[]> sorted = (ArrayList<ComputerNode[]>) E.clone();
             sorted = quickSort(sorted, 0, sorted.size() - 1);
 
+
             for (int i = 0; i < sorted.size(); i++) {
                 ComputerNode[] curNode = sorted.get(i);
                 if (!G.containsKey(curNode[0].getID())) {
@@ -33,12 +34,15 @@ public class CommunicationsMonitor {
 
                 ComputerNode cn1 = sorted.get(i)[0];
                 ComputerNode cn2 = sorted.get(i)[1];
-                cn1.addNeighbor(cn2);
-                cn2.addNeighbor(cn1);
+
                 LinkedList<ComputerNode> list1 = (LinkedList<ComputerNode>) G.get(curNode[0].getID());
                 LinkedList<ComputerNode> list2 = (LinkedList<ComputerNode>) G.get(curNode[1].getID());
                 int size1 = list1.size();
                 int size2 = list2.size();
+
+                handleNeighbors(cn1, cn2, size1, size2);
+                handleNeighbors(cn2, cn1, size2, size1);
+
                 if (size1 >= 1 && G.get(cn1.getID()).get(size1-1).getTimestamp() == cn1.getTimestamp()) {
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn2);
                 }else{
@@ -50,17 +54,28 @@ public class CommunicationsMonitor {
                     list2.add(cn2);
                 }
 
-                if (size1 >= 1 && !(cn1.getID() == G.get(cn1.getID()).get(size1-1).getID() &&
-                                    cn1.getTimestamp() == G.get(cn1.getID()).get(size1-1).getTimestamp())) {
+                if (size1 >= 1 && !(G.get(cn1.getID()).get(size1-1).equals(cn1))) {
                     G.get(cn1.getID()).get(size1-1).addNeighbor(cn1);
                 }
-                if (size2 >= 1 && !(cn2.getID() == G.get(cn2.getID()).get(size2-1).getID() &&
-                                    cn2.getTimestamp() == G.get(cn2.getID()).get(size2-1).getTimestamp())) {
+                if (size2 >= 1 && !(G.get(cn2.getID()).get(size2-1).equals(cn2))) {
                     G.get(cn2.getID()).get(size2-1).addNeighbor(cn2);
                 }
             }
         }else{
             System.err.println("According to the PDF, this method can't be called more than once.");
+        }
+        System.out.println("3: " + G.get(3).get(0));
+        System.out.println("3 Neighbors: " + G.get(3).get(0).getNeighbors().get(0).getNeighbors());
+    }
+
+    public void handleNeighbors(ComputerNode cn1, ComputerNode cn2, int size1, int size2)
+    {
+        if (size1 >= 1 && G.get(cn1.getID()).get(size1 - 1).equals(cn1)) {
+            G.get(cn1.getID()).get(size1 - 1).addNeighbor(cn2);
+        } else if (size2 >= 1 && G.get(cn2.getID()).get(size2 - 1).equals(cn2)) {
+            cn1.addNeighbor(G.get(cn2.getID()).get(size2 - 1));
+        } else {
+            cn1.addNeighbor(cn2);
         }
     }
 
@@ -76,9 +91,8 @@ public class CommunicationsMonitor {
 
     private static int partition(ArrayList<ComputerNode[]> computerNodeList, int first, int last) {
         ComputerNode[] pivot = computerNodeList.get(last);
-        int j = first;
         int i = first - 1;
-        for (; j < last; j++) {
+        for (int j = first; j < last; j++) {
             if (computerNodeList.get(j)[0].getTimestamp() <= pivot[0].getTimestamp()) {
                 i++;
                 ComputerNode[] temp = computerNodeList.get(i);
@@ -98,7 +112,6 @@ public class CommunicationsMonitor {
         ComputerNode b = new ComputerNode(c2,timestamp);
         E.add(new ComputerNode[]{a, b});
 
-
     }
 
     public List<ComputerNode> queryInfection(int c1, int c2, int x, int y){
@@ -112,6 +125,7 @@ public class CommunicationsMonitor {
                 current = Q.remove(0);
                 current.visited = true;
                 path.add(current);
+                System.out.println("Current Neighbors for " + current.getID() + ": " + current.getNeighbors());
                 for (ComputerNode neighbor : current.getNeighbors()) {
                     if (!neighbor.visited && neighbor.getTimestamp() >= current.getTimestamp()
                             && neighbor.getTimestamp() >= x
